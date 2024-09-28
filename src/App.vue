@@ -1,47 +1,58 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
-<template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+<template lang="">
+  <div v-for="(user, index) in dataUser" :key="index" class="itemsUser">
+    <span>{{ user.name }}</span>
+    <span v-if="user.status === 'active'">User is Active </span>
+    <span v-else>User is Inactive</span>
+  </div>
+  <div>
+    <a :href="`https://google.com`" target="_blank" style="color: red"
+      >Link to google</a
+    >
+  </div>
+  <br />
+  <button @click="toggleButton">Toggle Button</button>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<script lang="ts">
+// this use option api
+export default {
+  name: 'App',
+  data() {
+    return {
+      dataUser: [
+        {
+          name: 'user 1 with option api',
+          status: 'active',
+        },
+        {
+          name: 'user 2 with option api',
+          status: 'pending',
+        },
+        {
+          name: 'user 3 with option api',
+          status: 'inactive',
+        },
+      ],
+    };
+  },
+  methods: {
+    toggleButton() {
+      console.log('toggle button hit');
+    },
+  },
+};
+</script>
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+<style lang="css">
+.itemsUser {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #2c3e50;
+  gap: 10px;
 }
 </style>
